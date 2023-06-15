@@ -57,7 +57,7 @@ export class App extends Component {
           handleChange={this.handleChange}
         />
         <ImageGallery
-          articles={this.state.searchAr}
+          images={this.state.searchAr}
         />
       </>
     );

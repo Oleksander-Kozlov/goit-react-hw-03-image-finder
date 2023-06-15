@@ -73,3 +73,7 @@ export const InputSearch = styled.input`
   }
 `;
 
+// export const FcSearch = styled.svg` 
+//   size: 2em;
+//   vertical-align: middle;
+// `;

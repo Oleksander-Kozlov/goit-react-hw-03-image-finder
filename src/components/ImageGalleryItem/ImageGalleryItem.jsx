@@ -1,10 +1,12 @@
 import { GalerryLi, Img } from './ImageGalleryItem.styled'
+// import { Modal } from '../Modal/Modal.jsx';
 
+export const ImageGalleryItem = (images) => {
 
-export const ImageGalleryItem = ({ webformatURL, tags }) => {
+   
   return (
     <GalerryLi className="gallery-item">
-      <Img src={webformatURL} alt={tags} />
+      <Img src={images.webformatURL} alt={images.tags} />
     </GalerryLi>
   );
 };

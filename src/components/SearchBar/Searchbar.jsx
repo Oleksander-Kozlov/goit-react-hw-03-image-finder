@@ -10,7 +10,11 @@ import {
   BTNSubmit,
   ButtonLabel,
   InputSearch,
+  
 } from '../SearchBar/Searchbar.styled.js';
+
+
+import { FcSearch} from 'react-icons/fc';
 
 export class SearchBar extends Component {
   //прописую пропси
@@ -70,6 +74,7 @@ export class SearchBar extends Component {
         <Formik initialValues={{ searchimg: '' }}>
           <SearchForm onSubmit={this.props.handleSabmit} className="form">
             <BTNSubmit type="submit" className="button">
+              <FcSearch value={{ size: '1.5em' }} />
               <ButtonLabel className="button-label">Search</ButtonLabel>
             </BTNSubmit>
 
