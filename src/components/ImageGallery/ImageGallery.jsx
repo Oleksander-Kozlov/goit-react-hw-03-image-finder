@@ -1,8 +1,9 @@
 // import * as basicLightbox from 'basiclightbox';
 import { Component } from 'react';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem.jsx';
-import { Modal } from 'components/Modal/Modal.jsx';
+
 import { ImaGalleryUl } from './ImageGallery.styled.js';
+import { Modal } from '../Modal/Modal.jsx';
 // import * as basicLightbox from 'basiclightbox';
 // import { array } from 'yup';
 // import PropTypes  from 'pro;
@@ -10,53 +11,54 @@ export class ImageGallery extends Component {
   // Props = { articles: array, }
 
   state = {
-    id: 0,
+    ImageData: {},
     isModal: false,
   };
-  // showModal() {
+  // modalIsOpen() {
   //   this.setState({ isModal: true });
+  //   // return this.state.isModal
   // }
-  // closeModal() {
-  //   this.setState({ isModal: false });
-  // }
-  // handleClick(id) { 
-  //   for (const img of this.props.images) {
-  //     if (img.id === id) {
-  //       return img.largeImageURL;
-  //     }
-  //   }
-    
-      // this.setState.isModal = true;
-    
 
-      
-    // }
-  // }
+  getImgById = id =>
+    this.setState({
+      ImageData: this.props.images.find(el => el.id === id),
+      isModal: true,
+    });
+  modalIsClose= ()=> {
+    this.setState({ isModal: false });
+  }
+
   //  isModal&&<Modal largeImageURL={this.props.articles.largeImageURL}
   //       ></Modal>}
 
   render() {
-   
+    console.log('State', this.state);
     return (
       <ImaGalleryUl>
-        {this.props.images.map(
-          ({ id, tags, largeImageURL, webformatURL }) => (
+        {this.props.images.map(img => {
+          // const { id, tags, largeImageURL, webformatURL } = img;
+          return (
             <ImageGalleryItem
-              key={id}
+              key={img.id}
               // onClick={() => this.handleClick(id)}
-              images={this.props.images}
+              // images={this.props.images}
               isModal={this.state.isModal}
-              tags={tags}
-              largeImageURL={largeImageURL}
-              webformatURL={webformatURL}
+              // tags={tags}
+              // largeImageURL={largeImageURL}
+              // webformatURL={webformatURL}
+              getImgById={this.getImgById}
+              picture={img}
             ></ImageGalleryItem>
-          )
-        )}
-        {this.state.isModal && (
-          <Modal
-          // closeModal={}
-          ></Modal>
-        )}
+          );
+        })}
+        {/* {this.state.isModal && ( */}
+        <Modal
+          modalIsOpen={this.state.isModal}
+          // afterOpenModal={this.afterOpenModal}
+          img={this.state.ImageData}
+          closeModal={this.modalIsClose}
+        ></Modal>
+        {/* )} */}
       </ImaGalleryUl>
     );
   }

@@ -21,17 +21,16 @@ export class App extends Component {
     // Записую значення з імпуту до об"єкту
 
     this.setState({ loader: true });
-    console.log('e', e);
-    console.log('state', this.state);
+   
     const fetchedPic = fetchPictures(this.state.searchImg);
     fetchedPic
       .then(datas => {
         const { hits } = datas.data;
-        console.log('Statehits', hits);
+        
         this.setState(prevState => (prevState.searchAr = hits));
       })
       .catch(error => error.text)
-      .finally({ loader: false });
+      .finally{  this.setState({ loader: true })};
 
     // Оновлюю інпут
     this.setState({ searchImg: '' });
@@ -49,6 +48,7 @@ export class App extends Component {
   //   }
   // }
   render() {
+    const {loader, searchAr} =this.state
     console.log('state', this.state);
     return (
       <>
@@ -56,8 +56,10 @@ export class App extends Component {
           handleSabmit={this.handleSabmit}
           handleChange={this.handleChange}
         />
-        <ImageGallery
-          images={this.state.searchAr}
+        {loader && <p>Loading...</p>}
+          <ImageGallery
+            images={searchAr}
+
         />
       </>
     );
