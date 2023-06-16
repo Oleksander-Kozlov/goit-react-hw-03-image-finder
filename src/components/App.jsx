@@ -30,7 +30,7 @@ export class App extends Component {
         this.setState(prevState => (prevState.searchAr = hits));
       })
       .catch(error => error.text)
-      .finally{  this.setState({ loader: true })};
+      .finally  (this.setState({ loader: true }));
 
     // Оновлюю інпут
     this.setState({ searchImg: '' });
