@@ -1,7 +1,4 @@
-// import {
-//     ModalOverlay,
-//     Modalwin
-// } from './Modal.styled.js';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import ReactModal from 'react-modal';
 const customStyles = {
   overlay: {
@@ -28,26 +25,24 @@ const customStyles = {
 };
 ReactModal.setAppElement('#root');
 export const Modal = ({ img, closeModal, modalIsOpen }) => {
-    
-    // const close = () => { MediaStreamAudioDestinationNode({ modalIsOpen: false });} 
-        
-      
-      return (
-        <ReactModal
-          isOpen={modalIsOpen}
-          shouldCloseOnOverlayClick={true}
-          //   shouldCloseOnOverlayClick={modalIsOpen}
-          //   onAfterOpen={() => disableBodyScroll(document)}
-          //   onAfterClose={() => enableBodyScroll(document)}
-            onRequestClose={()=>closeModal()}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          {/* <ModalOverlay className='overlay'>
+  // const close = () => { MediaStreamAudioDestinationNode({ modalIsOpen: false });}
+
+  return (
+    <ReactModal
+      isOpen={modalIsOpen}
+      shouldCloseOnOverlayClick={true}
+      //   shouldCloseOnOverlayClick={modalIsOpen}
+      onAfterOpen={() => disableBodyScroll(document)}
+      onAfterClose={() => enableBodyScroll(document)}
+      onRequestClose={() => closeModal()}
+      style={customStyles}
+      contentLabel="Example Modal"
+    >
+      {/* <ModalOverlay className='overlay'>
             <Modalwin> */}
-              <img src={img.largeImageURL} alt={img.tags} />
-            {/* </Modalwin>
+      <img src={img.largeImageURL} alt={img.tags} lazy loading='true' />
+      {/* </Modalwin>
           </ModalOverlay> */}
-        </ReactModal>
-      );
+    </ReactModal>
+  );
 };
