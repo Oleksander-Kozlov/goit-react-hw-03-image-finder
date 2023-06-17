@@ -32,7 +32,7 @@ export class ImageGallery extends Component {
   //       ></Modal>}
 
   render() {
-    console.log('State', this.state);
+  
     return (
       <ImaGalleryUl>
         {this.props.images.map(img => {

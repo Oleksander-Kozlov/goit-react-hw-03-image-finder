@@ -1,4 +1,5 @@
-
+import { Loader } from "./Loader/Loader.jsx"
+import { BTNLoadMore } from './Button/Button.jsx';
 import { fetchPictures } from "./Api/fetchPictures.js";
 import { ImageGallery } from "./ImageGallery/ImageGallery.jsx";
 import { SearchBar } from "./SearchBar/Searchbar.jsx";
@@ -12,6 +13,7 @@ export class App extends Component {
     searchAr: [],
     searchImg: '',
     page: 1,
+    isShow: false,
   };
   // Слухач інпутів
   // handleChange = ({ target }) => {
@@ -63,6 +65,7 @@ export class App extends Component {
       this.setState({
         searchAr: [],
         page: 1,
+        isShow: false
       });
     }
     try {
@@ -73,6 +76,7 @@ export class App extends Component {
       console.log('images', images);
       this.setState(prevImages => ({
         searchAr: [...prevImages.searchAr, ...images.hits],
+        isShow: true,
       }));
     } catch (error) {
       this.setState({ error });
@@ -84,17 +88,29 @@ export class App extends Component {
   componentWillUnmount() {
     this.abortCtrl.abort();
   }
+
+  newFetchImages = () => {
+    this.setState({
+      page: this.state.page + 1,
+    });
+  };
+
+  // onChange = () => {
+  //   this.state.page;
+  // }
   render() {
-    const { loader, searchAr } = this.state;
-    console.log('state', this.state);
+    const { isLoading, searchAr, isShow } = this.state;
+    console.log('loader', isLoading);
     return (
       <>
         <SearchBar
           handleSabmit={this.handleSabmit}
           handleChange={this.handleChange}
         />
-        {loader && <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maxime corrupti, veritatis, iusto porro excepturi libero asperiores itaque, veniam beatae laudantium nam dolor. Beatae, mollitia? Repellendus ullam mollitia consequatur voluptatem.</p>}
+        {isLoading && <Loader />}
+
         <ImageGallery images={searchAr} />
+        {isShow && <BTNLoadMore onChange={this.newFetchImages} />}
       </>
     );
   }
