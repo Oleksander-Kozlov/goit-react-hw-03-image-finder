@@ -32,6 +32,6 @@ export  async function fetchPictures( namePic, abortCtrl, page = 1 ) {
       page: page,
     },
   });
-
+console.log('response.data', response.data);
   return response.data;
 };
