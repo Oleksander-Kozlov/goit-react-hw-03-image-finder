@@ -1,8 +1,4 @@
-
-import {
-  Formik,
-   ErrorMessage
-} from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import React, { Component } from 'react';
 import {
   SearchForm,
@@ -10,13 +6,12 @@ import {
   BTNSubmit,
   ButtonLabel,
   InputSearch,
-  
 } from '../SearchBar/Searchbar.styled.js';
 
-
-import { FcSearch} from 'react-icons/fc';
+import { FcSearch } from 'react-icons/fc';
 
 export class SearchBar extends Component {
+  //стан
   state = {
     searchImg: '',
   };

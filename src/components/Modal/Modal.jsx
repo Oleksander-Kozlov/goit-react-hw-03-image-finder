@@ -25,24 +25,21 @@ const customStyles = {
 };
 ReactModal.setAppElement('#root');
 export const Modal = ({ img, closeModal, modalIsOpen }) => {
-  // const close = () => { MediaStreamAudioDestinationNode({ modalIsOpen: false });}
+
 
   return (
     <ReactModal
       isOpen={modalIsOpen}
       shouldCloseOnOverlayClick={true}
-      //   shouldCloseOnOverlayClick={modalIsOpen}
       onAfterOpen={() => disableBodyScroll(document)}
       onAfterClose={() => enableBodyScroll(document)}
       onRequestClose={() => closeModal()}
       style={customStyles}
       contentLabel="Example Modal"
     >
-      {/* <ModalOverlay className='overlay'>
-            <Modalwin> */}
+      
       <img src={img.largeImageURL} alt={img.tags} loading="lazy" />
-      {/* </Modalwin>
-          </ModalOverlay> */}
+      
     </ReactModal>
   );
 };

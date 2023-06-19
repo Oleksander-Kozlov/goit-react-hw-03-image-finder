@@ -10,7 +10,9 @@ import { ErMessage } from './SearchBar/ErMessage.jsx';
 
 // import { fetchPictures } from "./Api/fetchPictures.js";
 export class App extends Component {
+  // Переривач запитів
   abortCtrl;
+  // Стан
   state = {
     isLoading: false,
     error: null,
@@ -24,6 +26,7 @@ export class App extends Component {
   handleSabmit = input => {
     this.setState({ searchImg: input });
   };
+  //стилі для App
   appStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -32,14 +35,16 @@ export class App extends Component {
     fontSize: 40,
     color: '#010101',
   };
-
+  // Життєвий цикл
   async componentDidUpdate(_, nextState) {
+    // перевірка на однаковий ввід та повтор сторінок запиту
     if (
       this.state.searchImg === nextState.searchImg &&
       this.state.page === nextState.page
     ) {
       return;
     }
+    // перевірка на новий пошук в інпуті
     if (this.state.searchImg !== nextState.searchImg) {
       this.setState({
         searchAr: [],
@@ -49,28 +54,33 @@ export class App extends Component {
     }
     try {
       const { searchImg, page } = this.state;
+      //ініціалізація абортконтролера
       this.abortCtrl = new AbortController();
+      // зміна стану
       this.setState({ isLoading: true, error: null });
+      //запит на API
       const images = await fetchPictures(searchImg, this.abortCtrl, page);
-if (images.totalhits) {
-  Notify.info(`Hooray! We found ${images.totalHits} images.`);
-}
-      
+      // Нотифікашка скільки є картинок по запиту
+      if (images.totalhits) {
+        Notify.info(`Hooray! We found ${images.totalHits} images.`);
+      }
+      // додаю у стан масив даних для  для галереї
       this.setState(
         prevImages => ({
           searchAr: [...prevImages.searchAr, ...images.hits],
           isShow: true,
         }),
+        //плавний скрол
         () => {
           if (page !== 1)
             window.scrollBy({
-              top: 280 * 3,
+              top: 260 * 3,
               behavior: 'smooth',
             });
         }
       );
-
-      if (images.hits.length < 12 ) {
+      //перевірка на останю партію картинок і приховання кнопки LoadMore
+      if (images.hits.length < 12) {
         this.setState({
           isShow: false,
         });
@@ -90,7 +100,7 @@ if (images.totalhits) {
   // componentWillUnmount() {
   //   this.abortCtrl.abort();
   // }
-
+  //новий запит по кліку на LoadMore
   newFetchImages = () => {
     this.setState({
       page: this.state.page + 1,

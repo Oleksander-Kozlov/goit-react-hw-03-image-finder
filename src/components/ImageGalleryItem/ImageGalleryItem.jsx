@@ -1,11 +1,8 @@
-import { GalerryLi, Img } from './ImageGalleryItem.styled'
-// import { Modal } from '../Modal/Modal.jsx';
-   
+import { GalerryLi, Img } from './ImageGalleryItem.styled';
+
 export const ImageGalleryItem = ({ picture, getImgById }) => {
   const { id, webformatURL, tags } = picture;
   const handleClick = id => {
-    
-
     getImgById(id);
   };
   return (
@@ -14,4 +11,3 @@ export const ImageGalleryItem = ({ picture, getImgById }) => {
     </GalerryLi>
   );
 };
-
