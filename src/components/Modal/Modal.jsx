@@ -40,7 +40,7 @@ export const Modal = ({ img, closeModal, modalIsOpen }) => {
     >
       {/* <ModalOverlay className='overlay'>
             <Modalwin> */}
-      <img src={img.largeImageURL} alt={img.tags} lazy loading='true' />
+      <img src={img.largeImageURL} alt={img.tags} loading="lazy" />
       {/* </Modalwin>
           </ModalOverlay> */}
     </ReactModal>

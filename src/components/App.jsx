@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Loader } from './Loader/Loader.jsx';
+import  Loader  from './Loader/Loader.jsx';
 import { Notify } from 'notiflix';
 import { BTNLoadMore } from './Button/Button.jsx';
 import { fetchPictures } from './Api/fetchPictures.js';
@@ -106,7 +106,7 @@ export class App extends Component {
           isShow: false,
         });
         Notify.failure(
-          "We're sorry, but you've reached the end of search results."
+          "Sorry, that is all results."
         );
       }
     } catch (error) {
@@ -143,7 +143,10 @@ export class App extends Component {
           handleSabmit={this.handleSabmit}
           handleChange={this.handleChange}
         />
-        {isLoading && <Loader />}
+        {
+          isLoading
+          // true
+          && <Loader />}
         {error && <ErMessage>{error}</ErMessage>}
         <ImageGallery images={searchAr} />
         {isShow && <BTNLoadMore onChange={this.newFetchImages} />}

@@ -10,7 +10,7 @@ export const ImageGalleryItem = ({ picture, getImgById }) => {
   };
   return (
     <GalerryLi className="gallery-item" onClick={() => handleClick(id)}>
-      <Img src={webformatURL} alt={tags} lazy loading="true" />
+      <Img src={webformatURL} alt={tags} loading="lazy" />
     </GalerryLi>
   );
 };
