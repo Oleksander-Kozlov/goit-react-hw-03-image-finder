@@ -4,7 +4,7 @@ import { GalerryLi, Img } from './ImageGalleryItem.styled'
 export const ImageGalleryItem = ({ picture, getImgById }) => {
   const { id, webformatURL, tags } = picture;
   const handleClick = id => {
-    // console.log("Clicked item ID:", id);
+    
 
     getImgById(id);
   };
