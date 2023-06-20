@@ -10,6 +10,7 @@ import {
 
 import { FcSearch } from 'react-icons/fc';
 
+
 export class SearchBar extends Component {
   //стан
   state = {
@@ -18,12 +19,14 @@ export class SearchBar extends Component {
 
   // Слухач інпутів
   handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
+    this.setState({ [target.name]: target.value.trim() });
   };
   // Submit form
   submit = e => {
     e.preventDefault();
     this.props.handleSabmit(this.state.searchImg);
+   
+      
   };
 
   initialValues = { searchimg: '' };

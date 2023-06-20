@@ -42,8 +42,10 @@ export class App extends Component {
       this.state.searchImg === nextState.searchImg &&
       this.state.page === nextState.page
     ) {
-      return;
+      return 
+
     }
+   
     // перевірка на новий пошук в інпуті
     if (this.state.searchImg !== nextState.searchImg) {
       this.setState({
@@ -65,9 +67,19 @@ export class App extends Component {
         Notify.info(`Hooray! We found ${images.totalHits} images.`);
       }
       // додаю у стан масив даних для  для галереї
+      console.log(images.hits);
+      
       this.setState(
         prevImages => ({
-          searchAr: [...prevImages.searchAr, ...images.hits],
+          searchAr: [
+            ...prevImages.searchAr,
+            ...images.hits.map(({ tags, id, largeImageURL, webformatURL }) => ({
+              tags,
+              id,
+              largeImageURL,
+              webformatURL,
+            })),
+          ],
           isShow: true,
         }),
         //плавний скрол
@@ -97,9 +109,7 @@ export class App extends Component {
     }
   }
 
-  // componentWillUnmount() {
-  //   this.abortCtrl.abort();
-  // }
+
   //новий запит по кліку на LoadMore
   newFetchImages = () => {
     this.setState({
